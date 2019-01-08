@@ -1,0 +1,13 @@
+Metrica v.3
+
+La metodología MÉTRICA Versión 3 ofrece a las Organizaciones 
+un instrumento útil para la sistematización de las actividades 
+que dan soporte al ciclo de vida del software.
+
+Metodología de Planificación, Desarrollo y Mantenimiento de sistemas de información.
+
+Se presentan en esta carpeta los documentos que componen la metodología MÉTRICA VERSIÓN 3. 
+Iniciativa promovida por el Consejo Superior de Informática.
+
+MÉTRICA versión 3 puede ser utilizada libremente 
+y en cualquier explotación de la obra se hará constar la autoría original.

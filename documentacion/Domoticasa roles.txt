@@ -1,0 +1,53 @@
+Roles:
+	Diseño Hardware:
+		Documentacion hardware:
+			Titulo Domoticasa
+			Indice de contenido
+				Contexto del proyecto
+				Descripcion del problema
+				Objetivos y expectativas
+				
+				Glosario de terminos
+
+				Componentes
+					Descripcion
+					Montaje
+					Uso/Relacion con software
+					Cant y precio
+			/*
+			Maqueta de casa domotica
+			sensores, motores, reles sustituido por leds, trasmision,
+			persianas o puerta de garaje, luces, ventilador regulable
+			*/
+	Diseño Software:
+		Documentacion Software:
+			Titulo Domoticasa
+			Indice de contenido
+				Contexto del proyecto
+				Descripcion del problema
+				Objetivos y expectativas
+
+				Glosario de terminos
+
+				Modelo de negocio
+				Vision general del negocio
+				Requisitos
+					Generales
+					De informacion
+					De negocio
+					Funcionales
+					No funcionales
+				Pruebas de aceptacion
+				Modelo conceptual
+				Modelo relacional en 3FN
+				Modelo tecnologico
+		Entrada de datos:
+			Html/css, php, android(java), entrada fisica
+		Gestion de datos:
+			java, python, php, mysql
+		Salida de datos:
+			html/css, php, android(java), entrada fisica
+
+Miguel angel castañeda garcia
+Juan Jose Correa Leiva
+Serhiy Ivancheskul - Coordinador Panel Web
