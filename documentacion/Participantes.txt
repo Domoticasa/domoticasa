@@ -1,0 +1,38 @@
+Los perfiles establecidos son:
+
+- Directivo
+
+Autorizan y validan cada uno de los procesos realizador 
+durante el desarrollo del Sistema de informacion. 
+Aportan informacion sobre las necesidades planteadas
+y validan los resultados. Se ocupan del seguimiento y control del desarrollo
+del proyecto y resolveran cualquier contingencia que ocurra.
+
+- Jefe de proyecto
+
+Ejercen labores de coordinacion y direccion en la realizacion de los procesos.
+Selecciona la estrategia de desarrollo para el proceso que tenga asignado.
+Elabora informe de seguimiento y archiva la documentacion una vez el proceso
+ha terminado.
+
+- Consultor
+
+Asesora en cuestiones que requieren conocimiento especializado.
+Evalua y propone tecnicas y tecnologias
+
+- Analista
+
+Elaboran un catalogo detallado de requisitos que describen al Sistema de
+informacion. Participa en el diseño de las bases de datos
+
+- Programador
+
+Construye el codigo ofrecido por el analista que da lugar 
+al Sistema de informacion, asi como el codigo de migracion y carga inicial 
+de datos.
+
+- - - - - - - - - - - - - - - - - - - - - - - - - -
+
+Miguel angel castañeda garcia - Directivo
+Juan Jose Correa Leiva - Programador
+Serhiy Ivancheskul - Jefe de proyecto Panel Web

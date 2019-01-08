@@ -1,4 +1,12 @@
-Roles:
+Procesos del proyecto:
+- Planificacion de sistemas de informacion
+Orienta las actuaciones en materia de desarrollo de sistemas
+de informacion. 
+- Desarrollo de sistemas de informacion
+
+- Mantenimiento de sistemas de informacion
+
+
 	Diseño Hardware:
 		Documentacion hardware:
 			Titulo Domoticasa
@@ -47,7 +55,3 @@ Roles:
 			java, python, php, mysql
 		Salida de datos:
 			html/css, php, android(java), entrada fisica
-
-Miguel angel castañeda garcia
-Juan Jose Correa Leiva
-Serhiy Ivancheskul - Coordinador Panel Web
