@@ -1,7 +1,9 @@
 Procesos del proyecto:
+
 - Planificacion de sistemas de informacion
 Orienta las actuaciones en materia de desarrollo de sistemas
 de informacion. 
+
 - Desarrollo de sistemas de informacion
 
 - Mantenimiento de sistemas de informacion

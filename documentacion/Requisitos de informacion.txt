@@ -1,0 +1,28 @@
+RI-01
+	Como usuario,
+	Quiero disponer de la siguiente informacion sobre los dispositivos:
+	- Estado de los dispositivos
+	- Cual es mi privilegio, sobre que dispositivo puedo actuar
+	- Mis programaciones
+	- Para cada dispositivo: 
+		- Cuantas veces se ha actuado sobre el
+		- Durante cuanto tiempo ha actuado
+		- Quien ha actuado sobre el
+		- Su programacion
+
+RI-02
+	Como administrador,
+	Quiero disponer de la siguiente informacion sobre los dispositivos:
+	- Estado de los dispositivos
+	- Para cada dispositivo:
+		- Cuantas veces se ha actuado sobre el
+		- Durante cuanto tiempo ha actuado
+		- Quien ha actuado sobre el
+		- Su programacion
+
+RI-03
+	Como administrador,
+	Quiero disponer de la siguiente informacion sobre los usuarios:
+	- Sus usuarios y contraseñas de acceso
+	- Sus privilegios
+	- Sus programaciones
