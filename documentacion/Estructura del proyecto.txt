@@ -1,14 +1,3 @@
-Procesos del proyecto:
-
-- Planificacion de sistemas de informacion
-Orienta las actuaciones en materia de desarrollo de sistemas
-de informacion. 
-
-- Desarrollo de sistemas de informacion
-
-- Mantenimiento de sistemas de informacion
-
-
 	Diseño Hardware:
 		Documentacion hardware:
 			Titulo Domoticasa
@@ -36,9 +25,7 @@ de informacion.
 				Contexto del proyecto
 				Descripcion del problema
 				Objetivos y expectativas
-
 				Glosario de terminos
-
 				Modelo de negocio
 				Vision general del negocio
 				Requisitos
