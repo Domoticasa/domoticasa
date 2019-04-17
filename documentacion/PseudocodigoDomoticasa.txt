@@ -1,0 +1,50 @@
+		Base de datos (MySQL) | ficheros (.txt)
+		^
+		|
+		v
+		JAVA (.java) <-> Swing (.java)
+		^
+		|
+		v
+      RELES <-> Arduino (.ino) <-> BT (Bluetooth)
+		^
+		|
+		v
+		TFT (Pantalla tactil)
+
+JAVA
+
+1. Leer del modelo (Base de datos o ficheros)
+2. Escribir el modelo en Swing
+3. Escribir el modelo en Arduino
+
+3. Espera entrada por Swing, Arduino
+
+3.1 Si entrada por Swing
+	Escribir en modelo (Base de datos o ficheros)
+	Leer del modelo (Base de datos o ficheros)
+	Escribir el modelo en Swing
+	Escribir el modelo en Arduino
+3.2 Si entrada por Arduino
+	Escribir en modelo (Base de datos o ficheros)
+	Leer del modelo (Base de datos o ficheos)
+	Escribir el modelo en Swing
+	Escribir el modelo en Arduino
+
+ARDUINO
+
+1. Espera entrada por JAVA, BT, TFT
+
+2.1 Si entrada por JAVA
+	Escribir el modelo en BT
+	Escribir el modelo en TFT
+	Escribir el modelo en RELES
+
+2.2 Si entrada por BT
+	Escribir la entrada a JAVA
+
+2.3 Si entrada por TFT
+	Escribir la entrada a JAVA
+
+3 Si nueva conexion BT
+	Leer del modelo (Base de datos o fichero)
