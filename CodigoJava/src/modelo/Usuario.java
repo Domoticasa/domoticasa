@@ -1,7 +1,15 @@
 package modelo;
 
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="usuario")
 public class Usuario {
 	/* - - - ATRIBUTOS - - - */
+	@Id
 	private String alias;
 	private String pass;
 	/* - - - FIN ATRIBUTOS - - - */
@@ -36,8 +44,17 @@ public class Usuario {
 	
 	/* - - - METODOS - - - */
 	public boolean equals(Usuario usuario) {
-		return (this.getAlias().equals(usuario.getAlias()) && 
-				this.getPass().equals(usuario.getPass()));
+		boolean res = false;
+		if (usuario instanceof Usuario) {
+			res = this.getAlias().equals(usuario.getAlias()) &&
+					this.getPass().equals(usuario.getPass());
+		}
+		return res;
+	}
+	
+	public String toString() {
+		return "Alias: " + getAlias() + "\n" +
+				"Pass: " + getPass();
 	}
 	/* - - - FIN METODOS - - - */
 }

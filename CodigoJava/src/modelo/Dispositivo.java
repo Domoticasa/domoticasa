@@ -1,7 +1,14 @@
 package modelo;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="dispositivo")
 public class Dispositivo {
 	/* - - - ATRIBUTOS - - - */
+	@Id
 	private String nombre;
 	private boolean estado;
 	/* - - - FIN ATRIBUTOS - - - */
@@ -38,6 +45,9 @@ public class Dispositivo {
 	public boolean equals(Dispositivo dispositivo) {
 		return (this.getNombre().equals(dispositivo.getNombre()) && 
 				this.getEstado() == dispositivo.getEstado());
+	}
+	public String toString() {
+		return getNombre();
 	}
 	/* - - - FIN METODOS - - - */
 }

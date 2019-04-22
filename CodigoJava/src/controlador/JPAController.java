@@ -1,29 +1,42 @@
 package controlador;
 
 import java.awt.EventQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import modelo.Dispositivo;
+import modelo.Usuario;
 import vista.JMenuPrincipal;
 
 public class JPAController {
 	/* - - - ATRIBUTOS - - - */
 	private static JPAController JPAController = null;
 	
-	private static final String BASE_DE_DATOS = "domoticasa";
+	private static final String UNIDAD_DE_PERSISTENCIA = "domoticasa";
 	private EntityManagerFactory emf;
 	private EntityManager em;
 	private EntityTransaction tx;
+	
+	
 	/* - - - FIN ATRIBUTOS - - - */
 	
 	/* - - - CONSTRUCTOR - - - */
 	private JPAController() {
-		setEntityManagerFactory(Persistence.createEntityManagerFactory(BASE_DE_DATOS));
-		setEntityManager(getEntityManagerFactory().createEntityManager());
-		setEntityTransaction(getEntityManager().getTransaction());
+		try {
+			setEntityManagerFactory(Persistence.createEntityManagerFactory(UNIDAD_DE_PERSISTENCIA));
+			setEntityManager(getEntityManagerFactory().createEntityManager());
+			setEntityTransaction(getEntityManager().getTransaction());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 	}
 	/* - - - FIN CONSTRUCTOR - - - */
 	
@@ -65,10 +78,45 @@ public class JPAController {
 		getEntityManager().close();
 		getEntityManagerFactory().close();
 	}
+	
+	// Metodo para validar usuario introducido en JLogin
+	public boolean isUsuario(String alias, String pass) {
+		boolean res = false;
+		Usuario usr = new Usuario(alias, pass);
+		// Usuario es el NOMBRE DE LA CLASE, NO DE LA TABLA
+		Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.alias = :alias");
+        q.setParameter("alias", alias);
+        try{ 
+        	Usuario admin = (Usuario) q.getSingleResult();
+	        res = usr.equals(admin) ? true : false;
+        } catch(Exception e){ 	          
+           System.out.println(e.getMessage());
+        }
+		return res;
+	}
+	// Metodo para obetner los dispositivos de la base de datos
+	public ArrayList<Dispositivo> getDispositivos() {
+		ArrayList<Dispositivo> res = new ArrayList<Dispositivo>();
+		
+		// Dispositivo es el NOMBRE DE LA CLASE, NO DE LA TABLA
+		Query q = em.createQuery("SELECT d FROM Dispositivo d");
+		
+        try{ 
+        	for (Object d : q.getResultList()) {
+        		res.add((Dispositivo) d);
+        	}
+        } catch(Exception e){ 	          
+           System.out.println(e.getMessage());
+        }
+		return res;
+	}
+	
+	
 	/* - - - FIN METODOS - - - */
 	
 	/* - - - PUNTO DE ENTRADA DE LA APLICACION - - - */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -79,6 +127,7 @@ public class JPAController {
 				}
 			}
 		});
+		
 	}
 	/* - - - FIN PUNTO DE ENTRADA DE LA APLICACION - - - */
 }
