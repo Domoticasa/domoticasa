@@ -6,7 +6,13 @@ import java.awt.event.ActionListener;
 import vista.JDispositivo;
 import vista.JDispositivos;
 import vista.JMenuPrincipal;
-
+/**
+ * <p>
+ * JDispositivoListener es la clase encargada d
+ * </p>
+ * @author WorKeLid
+ * @category Controlador
+ */
 public class JDispositivoListener implements ActionListener {
 	/* - - - ATRIBUTOS - - - */
 	private JPAController jpa;

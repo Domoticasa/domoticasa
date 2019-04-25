@@ -9,6 +9,13 @@ import controlador.JLoginListener;
 
 import javax.swing.JButton;
 
+/**
+ * <p>
+ * Panel que ofrece la entrada de un alias y una contraseña
+ * </p>
+ * @author WorKeLid
+ * @category Vista
+ */
 public class JLogin extends JPanel {
 	
 	/* - - - ATRIBUTOS - - - */
@@ -17,6 +24,12 @@ public class JLogin extends JPanel {
 	/* - - - FIN ATRIBUTOS - - - */
 	
 	/* - - - CONTRUCTOR - - - */
+	/**
+	 * <p>
+	 * Instancia un panel desde el que introducir un alias y una contraseña
+	 * </p>
+	 * @author WorKeLid
+	 */
 	public JLogin() {
 		/* - - -CONFIGURACION - - - */
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -56,6 +69,14 @@ public class JLogin extends JPanel {
 	/* - - - FIN CONTRUCTOR - - - */
 	
 	/* - - - GETS - - - */
+	// TODO: Finalizar Javadocs
+	/**
+	 * <p>
+	 *
+	 * </p>
+	 * @return
+	 * @author WorKeLid
+	 */
 	public String getAlias() {
 		return this.tfAlias.getText();
 	}
