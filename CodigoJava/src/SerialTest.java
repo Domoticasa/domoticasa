@@ -102,6 +102,13 @@ public class SerialTest implements SerialPortEventListener {
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
+	public synchronized void escribe(byte[] b) {
+		try {
+			output.write(b);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+	}
 
 	public static void main(String[] args) throws Exception {
 		SerialTest main = new SerialTest();
@@ -115,5 +122,12 @@ public class SerialTest implements SerialPortEventListener {
 		};
 		t.start();
 		System.out.println("Started");
+		
+		Thread.sleep(5000);
+		System.out.println("ahora");
+		String outputLine = "hola arduino";
+		byte[] outputLineByte = outputLine.getBytes();
+		
+		main.escribe(outputLineByte);
 	}
 }
