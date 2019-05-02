@@ -51,6 +51,8 @@ public class JDispositivoListener implements ActionListener {
 				jd.dispositivo.setEstado(false);
 				jpa.getEntityTransaction().commit();
 				
+				ArduinoController.getInstance().refrescar();
+				
 				jd.tglbtnEstadoDispositivo.setText("Encender");
 				jd.revalidate();
 			break;
@@ -61,6 +63,8 @@ public class JDispositivoListener implements ActionListener {
 				jpa.getEntityTransaction().begin();
 				jd.dispositivo.setEstado(true);
 				jpa.getEntityTransaction().commit();
+				
+				ArduinoController.getInstance().refrescar();
 				
 				jd.tglbtnEstadoDispositivo.setText("Apagar");
 				jd.revalidate();

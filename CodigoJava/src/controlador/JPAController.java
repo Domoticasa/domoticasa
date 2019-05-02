@@ -10,11 +10,12 @@ import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 import modelo.Dispositivo;
+import modelo.Sensor;
 import modelo.Usuario;
 import vista.JMenuPrincipal;
+import vista.MenuPrincipal;
 
 /**
- * 
  * <p>
  * JPAController es una clase singleton encargada de actuar sobre la base de datos
  * y ofrecer informacion sobre ella a las vistas de Swing y al Arduino.
@@ -27,10 +28,10 @@ import vista.JMenuPrincipal;
  * @author WorKeLid
  * @category Controlador
  */
-public class JPAController implements Runnable {
+public class JPAController {
 	
 	/* - - - ATRIBUTOS - - - */
-	private static JPAController JPAController = null;
+	private static JPAController jpac = null;
 	
 	private static final String UNIDAD_DE_PERSISTENCIA = "domoticasa";
 	private EntityManagerFactory emf;
@@ -45,7 +46,7 @@ public class JPAController implements Runnable {
 			setEntityManager(getEntityManagerFactory().createEntityManager());
 			setEntityTransaction(getEntityManager().getTransaction());	
 			
-			new Thread(this).start();
+			ArduinoController.getInstance();
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -120,8 +121,6 @@ public class JPAController implements Runnable {
 	/* - - - FIN SETS - - - */
 	
 	/* - - - METODOS - - - */
-	
-	// 
 	/**
 	 * <p>
 	 * Metodo estatico para crear una instancia singleton, usar este metodo para usar JPAController
@@ -130,9 +129,9 @@ public class JPAController implements Runnable {
 	 * @author WorKeLid
 	 */
     public static JPAController getInstance() { 
-        if (JPAController == null) 
-        	JPAController = new JPAController(); 
-        return JPAController; 
+        if (jpac == null) 
+        	jpac = new JPAController(); 
+        return jpac; 
     }
     /**
      * <p>
@@ -163,8 +162,7 @@ public class JPAController implements Runnable {
         try{ 
         	Usuario admin = (Usuario) q.getSingleResult();
 	        res = usr.equals(admin) ? true : false;
-        } catch(Exception e){ 	   
-        	// TODO: Mostrar mensaje en etiqueta auxiliar
+        } catch(Exception e){
         	System.out.println(e.getMessage());
         }
 		return res;
@@ -184,8 +182,7 @@ public class JPAController implements Runnable {
         	for (Object d : q.getResultList()) {
         		res.add((Usuario) d);
         	}
-        } catch(Exception e){ 	          
-        	// TODO: Mostrar mensaje en etiqueta auxiliar
+        } catch(Exception e){
         	System.out.println(e.getMessage());
         }
 		return res;
@@ -205,30 +202,80 @@ public class JPAController implements Runnable {
         	for (Object d : q.getResultList()) {
         		res.add((Dispositivo) d);
         	}
-        } catch(Exception e){ 	          
-        	// TODO: Mostrar mensaje en etiqueta auxiliar
+        } catch(Exception e){
         	System.out.println(e.getMessage());
         }
 		return res;
 	}
-	/* - - - FIN METODOS - - - */
-	
-	/* - - - HILO - - - */
-	public void run() {
-		while(true) {
-			System.out.println("hola");
-		}
+	/**
+	 * <p>
+	 * Devuelve todos los sensores de la base de datos
+	 * </p>
+	 * @return Un ArrayList<Sensor> con los sensores
+	 * @author WorKeLid
+	 */
+	public ArrayList<Sensor> getSensores() {
+		ArrayList<Sensor> res = new ArrayList<Sensor>();
+		
+		Query q = em.createQuery("SELECT s FROM Sensor s");
+        try{ 
+        	for (Object d : q.getResultList()) {
+        		res.add((Sensor) d);
+        	}
+        } catch(Exception e){
+        	System.out.println(e.getMessage());
+        }
+		return res;
 	}
-	/* - - - FIN HILO - - - */
+	/**
+	 * <p>
+	 * Actualiza los sensores de la base de datos
+	 * </p>
+	 * @param sensores Un ArrayList&lt;Sensor&gt; con los sensores leidos de Arduino
+	 * @author WorKeLid
+	 */
+	public void UpdateSensores(ArrayList<Sensor> sensores) {
+		getEntityTransaction().begin();
+		for (Sensor s : sensores) {
+			getEntityManager().merge(s);
+		}
+		getEntityTransaction().commit();
+	}
+	/* - - - FIN METODOS - - - */
 	
 	/* - - - PUNTO DE ENTRADA DE LA APLICACION - - - */
 	public static void main(String[] args) {
 		
+		/* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MenuPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					// TODO: Arreglar URL imagenes
 					JMenuPrincipal frame = new JMenuPrincipal();
 					frame.setVisible(true);
+					JPAController.getInstance();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

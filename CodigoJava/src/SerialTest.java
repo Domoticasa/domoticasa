@@ -8,6 +8,8 @@ import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener; 
 import java.util.Enumeration;
 
+import com.sun.tools.xjc.outline.Outline;
+
 
 public class SerialTest implements SerialPortEventListener {
 	SerialPort serialPort;
@@ -102,9 +104,10 @@ public class SerialTest implements SerialPortEventListener {
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
 	}
-	public synchronized void escribe(byte[] b) {
+	public synchronized void escribe(String env) {
 		try {
-			output.write(b);
+			byte[] outputLineByte = env.getBytes();
+			output.write(outputLineByte);
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -125,9 +128,8 @@ public class SerialTest implements SerialPortEventListener {
 		
 		Thread.sleep(5000);
 		System.out.println("ahora");
-		String outputLine = "hola arduino";
-		byte[] outputLineByte = outputLine.getBytes();
+		String outputLine = "hola";
 		
-		main.escribe(outputLineByte);
+		main.escribe(outputLine);
 	}
 }

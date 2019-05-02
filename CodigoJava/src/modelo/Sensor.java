@@ -1,4 +1,3 @@
-
 package modelo;
 
 import javax.persistence.Entity;
@@ -6,21 +5,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="dispositivo")
-public class Dispositivo {
+@Table(name="sensor")
+public class Sensor {
 	/* - - - ATRIBUTOS - - - */
 	@Id
 	private String nombre;
-	private boolean estado;
+	private int valor;
 	/* - - - FIN ATRIBUTOS - - - */
 	
 	/* - - - CONSTRUCTORES - - - */
-	public Dispositivo() {
+	public Sensor() {
 		
 	}
-	public Dispositivo(String nombre, boolean estado) {
+	public Sensor(String nombre, int valor) {
 		setNombre(nombre);
-		setEstado(estado);
+		setValor(valor);
+	}
+	public Sensor(String sensor) {
+		String[] sensorString = sensor.split(":");
+		setNombre(sensorString[0]);
+		setValor(Integer.parseInt(sensorString[1]));
 	}
 	/* - - - FIN CONSTRUCTORES - - - */
 	
@@ -28,8 +32,8 @@ public class Dispositivo {
 	public String getNombre() {
 		return this.nombre;
 	}
-	public boolean getEstado() {
-		return this.estado;
+	public int getValor() {
+		return this.valor;
 	}
 	/* - - - FIN GETS - - - */
 	
@@ -37,22 +41,18 @@ public class Dispositivo {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public void setEstado(boolean estado) {
-		this.estado = estado;
+	public void setValor(int valor) {
+		this.valor = valor;
 	}
 	/* - - - FIN SETS - - - */
 	
 	/* - - - METODOS - - - */
-	public boolean equals(Dispositivo dispositivo) {
-		return (this.getNombre().equals(dispositivo.getNombre()) && 
-				this.getEstado() == dispositivo.getEstado());
+	public boolean equals(Sensor sensor) {
+		return (this.getNombre().equals(sensor.getNombre()) && 
+				this.getValor() == sensor.getValor());
 	}
 	public String toString() {
 		return getNombre();
-	}
-	public String toArduino() {
-		String estado = getEstado() ? "1" : "0";
-		return getNombre() + ":" + estado;
 	}
 	/* - - - FIN METODOS - - - */
 }
