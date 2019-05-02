@@ -1,8 +1,15 @@
+#include <DHT.h>
+#include "DHT.h"
+#define DHTPIN 2 //Analog 1
+#define DHTTYPE DHT11 
+DHT dht(DHTPIN, DHTTYPE);
+
 //String estadoBombillas = String(); // El nuevo estado a aplicar en las bombillas, enviado por java
 String estadoSensores = String(); // El estado a enviar de los sensores, enviar a java
 
 String strA0 = String(); // Representacion de los sensores en formato String
 String strA1 = String();
+String strA2 = String();
 
 String strPin = String(); // Representacion de los dispositivos en formato String
 
@@ -14,10 +21,12 @@ int bombilla3 = 10;
 // Los pines donde van los componentes
 int sensorLuz0 = A0;
 int sensorLuz1 = A1;
+int sensorTemp0 = A2;
 
 // Los valores actuales de los componentes
 int valorSensorLuz0 = 0;
 int valorSensorLuz1 = 0;
+float valorSensorTemp0 = 0;
 
 int lec_sensor = 0;
 
@@ -34,6 +43,7 @@ void loop() {
   // Recogemos el estado de los sensores
   valorSensorLuz0 = analogRead(sensorLuz0);
   valorSensorLuz1 = analogRead(sensorLuz1);
+  valorSensorTemp0 = dht.readTemperature();
 
   // Si de Java llega algo
   if (Serial.available() > 0) {
@@ -64,7 +74,10 @@ void loop() {
   if (lec_sensor%4 == 0) {
     strA0 = "A0:" + String(valorSensorLuz0);
     strA1 = " A1:" + String(valorSensorLuz1);
+    strA2 = " A2:" + String((int) valorSensorTemp0);
+    
     estadoSensores = strA0 + strA1;
+    estadoSensores = estadoSensores + strA2;
     Serial.println(estadoSensores);
   }
   lec_sensor++;
