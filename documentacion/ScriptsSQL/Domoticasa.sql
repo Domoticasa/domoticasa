@@ -27,8 +27,8 @@ values ("admin", "admin");
 
 insert into dispositivo (nombre, estado)
 values 	("12", 0),
-		("l1", 0),
-		("l0", 0);
+		("11", 0),
+		("10", 0);
 
 insert into sensor (nombre, valor)
 values 	("A0", 0),

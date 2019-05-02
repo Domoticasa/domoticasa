@@ -19,6 +19,8 @@ int sensorLuz1 = A1;
 int valorSensorLuz0 = 0;
 int valorSensorLuz1 = 0;
 
+int lec_sensor = 0;
+
 void setup() {
   Serial.begin (9600);
   // Los pines de las bombillas son salida
@@ -37,67 +39,35 @@ void loop() {
   if (Serial.available() > 0) {
 
     // Lee el mensaje java con formato <nombre_dispositivo>:<estado_dispositivo>[*] (ej. 12:1 11:1 10:0)
-    String estadoBombillas = Serial.readString();
+    String inputJava = Serial.readString();
 
     // Paso de String (que es una clase de Arduino) a char[]
-    int str_len = estadoBombillas.length();
-
-    /*
-    char char_dispositivos[str_len];
-    estadoBombillas.toCharArray(char_dispositivos, str_len);
-
-    char char_aux[str_len - 1];
+    int n_pin = inputJava.length()/5;
     
-    int t = 0;
-    while (t < str_len) {
-      
-      if (char_dispositivos[t]==' ') {
-        char char_dispositivo[t + 1];
-        
-        int j = 0;
-        while (j < t) {
-          char_dispositivo[j] = char_aux[j];
-          j++;
-        }
-        j = 0;
-        
-        while (j < sizeof(char_dispositivo)) {
-          
-          if (char_dispositivo[j]==':') {
-            char char_nombre[j];
-            int z = 0;
-            while (z < j) {
-              char_nombre[z] = char_aux[z];
-              z++;
-            }
-            String str_nombre = String(char_nombre);
-            String str_estado = String(char_dispositivo[j+1]);
+    int i = 0;
+    while (i < n_pin) {
+      String pin = inputJava.substring(i * 5 + 0, i * 5 + 2);
+      String valor = inputJava.substring(i * 5 + 3, i * 5 + 4);
 
-            String aux = str_nombre + str_estado;
-            //Serial.println(str_nombre);
-            //digitalWrite(str_nombre.toInt(), str_estado.toInt());
-            
-          } else {
-            char_aux[j] = char_dispositivo[j];
-          }
-          
-          j++;
-        }
-      } else {
-        char_aux[t] = char_dispositivos[t];  
-      }
+      Serial.print(pin.toInt());
+      Serial.print(":");
+      Serial.print(valor.toInt());
+      Serial.print(" ");
       
-      t++;
-      
-    } */
-  }
+      digitalWrite(pin.toInt(), valor.toInt());
+      i++;
+    }
+    Serial.println("");
+    }
   Serial.flush();
-  
-  strA0 = "A0:" + String(valorSensorLuz0);
-  strA1 = " A1:" + String(valorSensorLuz1);
-  estadoSensores = strA0 + strA1;
-  Serial.println(estadoSensores);
-  
+
+  if (lec_sensor%4 == 0) {
+    strA0 = "A0:" + String(valorSensorLuz0);
+    strA1 = " A1:" + String(valorSensorLuz1);
+    estadoSensores = strA0 + strA1;
+    Serial.println(estadoSensores);
+  }
+  lec_sensor++;
   Serial.flush(); 
-  delay(2000);
+  delay(500);
 }

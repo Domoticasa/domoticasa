@@ -3,6 +3,8 @@ package controlador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.persistence.EntityTransaction;
+
 import vista.JDispositivo;
 import vista.JDispositivos;
 import vista.JMenuPrincipal;
@@ -17,6 +19,7 @@ public class JDispositivoListener implements ActionListener {
 	/* - - - ATRIBUTOS - - - */
 	private JPAController jpa;
 	private JDispositivo jd;
+	private EntityTransaction tx;
 	/* - - - FIN ATRIBUTOS - - - */
 	
 	/* - - - CONTRUCTORES - - - */
@@ -46,10 +49,12 @@ public class JDispositivoListener implements ActionListener {
 			case "Apagar":
 				JMenuPrincipal.auxLabel.setText("Apagando dispositivo");
 				
+				tx = jpa.getEntityTransaction();
 				jpa.getEntityManager().merge(jd.dispositivo);
-				jpa.getEntityTransaction().begin();
+				tx.begin();
 				jd.dispositivo.setEstado(false);
-				jpa.getEntityTransaction().commit();
+				tx.commit();
+				
 				
 				ArduinoController.getInstance().refrescar();
 				
@@ -59,10 +64,11 @@ public class JDispositivoListener implements ActionListener {
 			case "Encender":
 				JMenuPrincipal.auxLabel.setText("Encendiendo dispositivo");
 				
+				tx = jpa.getEntityTransaction();
 				jpa.getEntityManager().merge(jd.dispositivo);
-				jpa.getEntityTransaction().begin();
+				tx.begin();
 				jd.dispositivo.setEstado(true);
-				jpa.getEntityTransaction().commit();
+				tx.commit();
 				
 				ArduinoController.getInstance().refrescar();
 				

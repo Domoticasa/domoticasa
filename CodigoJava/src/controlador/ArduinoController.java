@@ -137,14 +137,16 @@ public class ArduinoController implements SerialPortEventListener {
 			try {
 				String inputLine = input.readLine();
 				
-				String[] sensoresString = inputLine.split(" ");
-				ArrayList<Sensor> sensores = new ArrayList<Sensor>();
-				
-				for (String s : sensoresString) {
-					sensores.add(new Sensor(s));
+				if (inputLine.startsWith("A")) {
+					String[] sensoresString = inputLine.split(" ");
+					ArrayList<Sensor> sensores = new ArrayList<Sensor>();
+					
+					for (String s : sensoresString) {
+						sensores.add(new Sensor(s));
+					}
+					JPAController.getInstance().UpdateSensores(sensores);
+					
 				}
-				JPAController.getInstance().UpdateSensores(sensores);
-				
 				System.out.println("Que recibe java: " + inputLine);
 			} catch (Exception e) {
 				System.err.println(e.toString());
@@ -164,7 +166,7 @@ public class ArduinoController implements SerialPortEventListener {
 			for (Dispositivo d : dispositivos) {
 				output = output + d.toArduino() + " ";
 			}
-			output = output.trim();
+			
 			System.out.println("Que envia java: " + output);
 			
 			this.output.write(output.getBytes());

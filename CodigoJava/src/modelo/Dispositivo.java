@@ -52,7 +52,7 @@ public class Dispositivo {
 	}
 	public String toArduino() {
 		String estado = getEstado() ? "1" : "0";
-		return getNombre() + ":" + estado;
+		return getNombre().length() < 2 ? "0" + getNombre() + ":" + estado : getNombre() + ":" + estado;
 	}
 	/* - - - FIN METODOS - - - */
 }
