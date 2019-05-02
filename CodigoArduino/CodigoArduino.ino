@@ -4,14 +4,13 @@
 #define DHTTYPE DHT11 
 DHT dht(DHTPIN, DHTTYPE);
 
-//String estadoBombillas = String(); // El nuevo estado a aplicar en las bombillas, enviado por java
-String estadoSensores = String(); // El estado a enviar de los sensores, enviar a java
+String estadoSensores = String(); // El estado a enviar de los sensores, se envia a java
 
 String strA0 = String(); // Representacion de los sensores en formato String
 String strA1 = String();
 String strA2 = String();
 
-String strPin = String(); // Representacion de los dispositivos en formato String
+String strPin = String(); // Representacion del dispositivo en formato String
 
 // Los pines donde van los componentes
 int bombilla1 = 12;
@@ -36,6 +35,9 @@ void setup() {
   pinMode (12, OUTPUT);
   pinMode (11, OUTPUT);
   pinMode (10, OUTPUT);
+
+  Serial.println("listo");
+  
 }
 
 void loop() {
@@ -51,7 +53,6 @@ void loop() {
     // Lee el mensaje java con formato <nombre_dispositivo>:<estado_dispositivo>[*] (ej. 12:1 11:1 10:0)
     String inputJava = Serial.readString();
 
-    // Paso de String (que es una clase de Arduino) a char[]
     int n_pin = inputJava.length()/5;
     
     int i = 0;
@@ -68,7 +69,7 @@ void loop() {
       i++;
     }
     Serial.println("");
-    }
+  }
   Serial.flush();
 
   if (lec_sensor%4 == 0) {

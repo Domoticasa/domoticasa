@@ -137,6 +137,10 @@ public class ArduinoController implements SerialPortEventListener {
 			try {
 				String inputLine = input.readLine();
 				
+				if (inputLine.startsWith("listo")) {
+					refrescar();
+				}
+				
 				if (inputLine.startsWith("A")) {
 					String[] sensoresString = inputLine.split(" ");
 					ArrayList<Sensor> sensores = new ArrayList<Sensor>();
@@ -149,7 +153,7 @@ public class ArduinoController implements SerialPortEventListener {
 				}
 				System.out.println("Que recibe java: " + inputLine);
 			} catch (Exception e) {
-				System.err.println(e.toString());
+				
 			}
 		}
 		// Ignore all the other eventTypes, but you should consider the other ones.
